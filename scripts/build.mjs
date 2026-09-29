@@ -9,6 +9,7 @@ const FAQ_SETS = {
   occasion: ['etat', 'ancien', 'types', 'prix', 'gratuit', 'form'],
   contact: ['gratuit', 'form', 'conf', 'france'],
 };
+const REFS = JSON.parse(readFileSync('src/data/references.json', 'utf8'));
 const PAGES = { 'index.html': '/', 'fourrure-luxe.html': '/fourrure-luxe', 'fourrure-occasion.html': '/fourrure-occasion', 'contact.html': '/contact' };
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const partial = (n) => readFileSync(`src/partials/${n}.html`, 'utf8');
@@ -18,6 +19,12 @@ function faqBlock(set) {
   const html = items.map((f) => `    <details class="group reveal"><summary class="flex cursor-pointer items-center justify-between gap-6 py-7 font-display text-2xl md:text-3xl">${esc(f.q).replace(/ \?/g, '&nbsp;?')}<span class="plus text-3xl text-gold-400 transition-transform duration-500" aria-hidden="true">+</span></summary><div class="faq-panel"><div><p class="pb-7 text-bone/60">${esc(f.a)}</p></div></div></details>`).join('\n');
   const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
   return `<div class="divide-y divide-gold-400/20 border-y border-gold-400/20">\n${html}\n  </div>\n  <script type="application/ld+json">${JSON.stringify(ld)}</script>`;
+}
+
+function refsBlock() {
+  const card = (r, hidden) => `<li class="ref-card"${hidden ? ' aria-hidden="true"' : ''}><div class="ref-photo"><img src="/assets/img/${r.img}.jpg" alt="${hidden ? '' : esc(r.alt)}" loading="lazy" width="420" height="560"></div><div class="ref-text"><p class="ref-maison">${esc(r.maison)}</p><p class="ref-piece">${esc(r.piece)}</p><p class="ref-prix"><span>Fourchette indicative</span>${esc(r.prix)}</p></div></li>`;
+  const list = (hidden) => REFS.map((r) => card(r, hidden)).join('');
+  return `<div class="ref-marquee"><ul class="ref-track">${list(false)}${list(true)}${list(true)}</ul></div>`;
 }
 
 rmSync('dist', { recursive: true, force: true });
@@ -31,6 +38,7 @@ for (const [file, path] of Object.entries({ ...PAGES, '404.html': '/404' })) {
   const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || 'Maison Peltra';
   const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
   html = html.replace(/<!--@include (\w+)-->/g, (_, n) => partial(n));
+  html = html.replace(/<!--@references-->/g, () => refsBlock());
   html = html.replace(/<!--@faq (\w+)-->/g, (_, s) => faqBlock(s));
   html = html.replaceAll('%TITLE%', title).replaceAll('%DESC%', desc).replaceAll('%PATH%', path === '/' ? '/' : path).replaceAll('%SITE_URL%', SITE_URL);
   if (path === '/404') html = html.replace(/<link rel="canonical"[^>]*>\s*/g, '').replace('index, follow', 'noindex');

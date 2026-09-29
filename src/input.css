@@ -79,3 +79,20 @@
 }
 
 .nav-link[aria-current='page'] { color: #e6cd8f; }
+
+/* Bandeau références */
+.ref-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ref-track { display: flex; width: max-content; gap: 1.25rem; padding: .5rem 0; animation: ref-scroll 45s linear infinite; }
+.ref-marquee:hover .ref-track, .ref-marquee:focus-within .ref-track, .ref-marquee:active .ref-track { animation-play-state: paused; }
+@keyframes ref-scroll { to { transform: translateX(calc(-100% / 3 - 0.42rem)); } }
+.ref-card { width: 260px; flex: none; overflow: hidden; border: 1px solid rgba(212,176,106,.25); background: #120f0b; transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .4s; }
+.ref-card:hover { transform: translateY(-6px); border-color: #d4b06a; }
+.ref-photo { height: 340px; background: #fff; padding: .75rem; }
+.ref-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ref-text { padding: 1.1rem 1.1rem 1.3rem; text-align: center; }
+.ref-maison { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.6rem; line-height: 1.1; color: #e6cd8f; }
+.ref-piece { margin-top: .5rem; min-height: 3.6em; font-size: .78rem; line-height: 1.5; color: rgba(242,236,224,.65); }
+.ref-prix { margin-top: .8rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; color: #f3e3b8; }
+.ref-prix span { display: block; margin-bottom: .15rem; font-family: Geist, system-ui, sans-serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: #bf974a; }
+@media (min-width: 768px) { .ref-card { width: 300px; } .ref-photo { height: 400px; } }
+@media (prefers-reduced-motion: reduce) { .ref-marquee { overflow-x: auto; } .ref-track { animation: none; } .ref-card[aria-hidden='true'] { display: none; } }
