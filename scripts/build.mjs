@@ -15,7 +15,7 @@ const partial = (n) => readFileSync(`src/partials/${n}.html`, 'utf8');
 
 function faqBlock(set) {
   const items = FAQ_SETS[set].map((k) => FAQ[k]);
-  const html = items.map((f) => `    <details class="group reveal"><summary class="flex cursor-pointer items-center justify-between gap-6 py-7 font-display text-2xl md:text-3xl">${esc(f.q)}<span class="plus text-3xl text-gold-400 transition-transform duration-500" aria-hidden="true">+</span></summary><div class="faq-panel"><div><p class="pb-7 text-bone/60">${esc(f.a)}</p></div></div></details>`).join('\n');
+  const html = items.map((f) => `    <details class="group reveal"><summary class="flex cursor-pointer items-center justify-between gap-6 py-7 font-display text-2xl md:text-3xl">${esc(f.q).replace(/ \?/g, '&nbsp;?')}<span class="plus text-3xl text-gold-400 transition-transform duration-500" aria-hidden="true">+</span></summary><div class="faq-panel"><div><p class="pb-7 text-bone/60">${esc(f.a)}</p></div></div></details>`).join('\n');
   const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
   return `<div class="divide-y divide-gold-400/20 border-y border-gold-400/20">\n${html}\n  </div>\n  <script type="application/ld+json">${JSON.stringify(ld)}</script>`;
 }

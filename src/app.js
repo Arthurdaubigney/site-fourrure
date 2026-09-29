@@ -27,7 +27,8 @@
     nav.classList.toggle('bg-ink-950/80', y > 40);
     nav.classList.toggle('backdrop-blur-md', y > 40);
     const fr = form ? form.getBoundingClientRect() : null;
-    const show = y > innerHeight * 0.7 && !(fr && fr.top < innerHeight * 0.6 && fr.bottom > innerHeight * 0.3);
+    const ft = $('footer');
+    const show = y > innerHeight * 0.7 && !(ft && ft.getBoundingClientRect().top < innerHeight - 40) && !(fr && fr.top < innerHeight * 0.6 && fr.bottom > innerHeight * 0.3);
     fab.classList.toggle('opacity-0', !show);
     fab.classList.toggle('translate-y-6', !show);
     fab.classList.toggle('pointer-events-none', !show);
@@ -64,9 +65,20 @@
   $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
-  // Tally embeds (widget script) + FAQ single-open
-  const loadTally = () => window.Tally ? Tally.loadEmbeds() : null;
-  addEventListener('load', loadTally);
+  // Tally embed (official loader pattern; iframe-resizer grows the iframe to the full form height)
+  const tallyFrames = $$('iframe[data-tally-src]');
+  if (tallyFrames.length) {
+    const w = 'https://tally.so/widgets/embed.js';
+    const v = () => {
+      if (typeof Tally !== 'undefined') Tally.loadEmbeds();
+      else tallyFrames.forEach((f) => { if (!f.src) f.src = f.dataset.tallySrc; });
+    };
+    if (typeof Tally !== 'undefined') v();
+    else {
+      const s = document.createElement('script');
+      s.src = w; s.onload = v; s.onerror = v; document.body.appendChild(s);
+    }
+  }
   $$('details').forEach((d) => d.addEventListener('toggle', () => {
     if (d.open) $$('details').forEach((o) => { if (o !== d) o.open = false; });
   }));
