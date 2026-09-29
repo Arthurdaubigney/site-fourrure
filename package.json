@@ -1,0 +1,14 @@
+{
+  "name": "maison-peltra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site officiel de Maison Peltra",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/input.css -o dist/assets/style.css --minify",
+    "build": "node scripts/build.mjs",
+    "dev": "tailwindcss -c tailwind.config.js -i src/input.css -o dist/assets/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
