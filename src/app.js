@@ -18,14 +18,16 @@
 
   // Nav + floating CTA + parallax
   const nav = $('#nav'), fab = $('#floatCta'), form = $('#estimation');
+  if (form) fab.setAttribute('href', '#estimation');
+  $$('.nav-link').forEach((a) => { if (a.getAttribute('href') === location.pathname.replace(/\/$/, '') || (a.getAttribute('href') === '/' && location.pathname === '/')) a.setAttribute('aria-current', 'page'); });
   const par = $$('[data-parallax]');
   let ticking = false;
   const onScroll = () => {
     const y = scrollY;
     nav.classList.toggle('bg-ink-950/80', y > 40);
     nav.classList.toggle('backdrop-blur-md', y > 40);
-    const fr = form.getBoundingClientRect();
-    const show = y > innerHeight * 0.7 && !(fr.top < innerHeight * 0.6 && fr.bottom > innerHeight * 0.3);
+    const fr = form ? form.getBoundingClientRect() : null;
+    const show = y > innerHeight * 0.7 && !(fr && fr.top < innerHeight * 0.6 && fr.bottom > innerHeight * 0.3);
     fab.classList.toggle('opacity-0', !show);
     fab.classList.toggle('translate-y-6', !show);
     fab.classList.toggle('pointer-events-none', !show);
@@ -69,5 +71,5 @@
     if (d.open) $$('details').forEach((o) => { if (o !== d) o.open = false; });
   }));
 
-  $('#year').textContent = new Date().getFullYear();
+  const yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
 })();

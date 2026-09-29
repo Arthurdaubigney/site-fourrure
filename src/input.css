@@ -77,3 +77,5 @@
   .reveal, .img-reveal, .line-mask > span { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
   .gold-text, .marquee-track, .pulse-ring { animation: none !important; }
 }
+
+.nav-link[aria-current='page'] { color: #e6cd8f; }
