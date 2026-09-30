@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: { 950: '#070504', 900: '#0b0907', 800: '#120f0b', 700: '#1a1610', 600: '#262017' },
-        gold: { 200: '#f3e3b8', 300: '#e6cd8f', 400: '#d4b06a', 500: '#bf974a', 600: '#9c7635', 700: '#6f5323' },
-        bone: '#f2ece0',
+        ink: { 950: 'rgb(var(--ink-950) / <alpha-value>)', 900: 'rgb(var(--ink-900) / <alpha-value>)', 800: 'rgb(var(--ink-800) / <alpha-value>)', 700: 'rgb(var(--ink-700) / <alpha-value>)', 600: 'rgb(var(--ink-600) / <alpha-value>)' },
+        gold: { 200: 'rgb(var(--gold-200) / <alpha-value>)', 300: 'rgb(var(--gold-300) / <alpha-value>)', 400: 'rgb(var(--gold-400) / <alpha-value>)', 500: 'rgb(var(--gold-500) / <alpha-value>)', 600: 'rgb(var(--gold-600) / <alpha-value>)', 700: 'rgb(var(--gold-700) / <alpha-value>)' },
+        bone: 'rgb(var(--bone) / <alpha-value>)',
       },
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

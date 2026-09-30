@@ -2,10 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  :root {
+    --ink-950: 22 18 13; --ink-900: 33 28 21; --ink-800: 44 37 28; --ink-700: 56 47 36; --ink-600: 70 59 45;
+    --gold-200: 243 227 184; --gold-300: 230 205 143; --gold-400: 212 176 106; --gold-500: 191 151 74; --gold-600: 156 118 53; --gold-700: 111 83 35;
+    --bone: 246 240 228;
+  }
+  /* Sections claires : ivoire chaud, texte brun, or profond */
+  .theme-light {
+    --ink-950: 240 231 214; --ink-900: 250 246 238; --ink-800: 236 226 208; --ink-700: 226 214 192; --ink-600: 214 200 176;
+    --gold-200: 111 83 35; --gold-300: 125 95 40; --gold-400: 138 106 44; --gold-500: 156 118 53; --gold-600: 138 106 44; --gold-700: 111 83 35;
+    --bone: 42 33 25;
+    color: rgb(var(--bone));
+  }
+  .theme-light .gold-text { background-image: linear-gradient(100deg, #7a5a22 0%, #b78f45 30%, #8a6a2c 50%, #b78f45 70%, #7a5a22 100%); background-size: 220% 100%; }
+  .theme-light .card-tilt .glare { background: radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.35), transparent 55%); }
+}
+
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { @apply bg-ink-900 text-bone font-sans antialiased; }
-  ::selection { background: #d4b06a; color: #0b0907; }
+  ::selection { background: #d4b06a; color: #1a140b; }
   :focus-visible { outline: 2px solid #d4b06a; outline-offset: 3px; }
 }
 
@@ -18,7 +36,7 @@
   }
   .eyebrow { @apply text-[11px] uppercase tracking-[0.32em] text-gold-400; }
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-8 py-4 text-[13px] font-medium uppercase tracking-[0.18em] text-ink-950;
+    @apply relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-8 py-4 text-[13px] font-medium uppercase tracking-[0.18em] text-[#1a140b];
     background: linear-gradient(120deg, #bf974a, #f3e3b8 45%, #d4b06a 60%, #9c7635);
     box-shadow: 0 0 0 1px rgba(243,227,184,.35), 0 18px 50px -12px rgba(212,176,106,.55);
     transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s cubic-bezier(.22,1,.36,1);
@@ -85,7 +103,7 @@
 .ref-track { display: flex; width: max-content; gap: 1.25rem; padding: .5rem 0; animation: ref-scroll 45s linear infinite; }
 .ref-marquee:hover .ref-track, .ref-marquee:focus-within .ref-track, .ref-marquee:active .ref-track { animation-play-state: paused; }
 @keyframes ref-scroll { to { transform: translateX(calc(-100% / 3 - 0.42rem)); } }
-.ref-card { width: 260px; flex: none; overflow: hidden; border: 1px solid rgba(212,176,106,.25); background: #120f0b; transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .4s; }
+.ref-card { width: 260px; flex: none; overflow: hidden; border: 1px solid rgba(212,176,106,.25); background: #2a231a; transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .4s; }
 .ref-card:hover { transform: translateY(-6px); border-color: #d4b06a; }
 .ref-photo { height: 340px; background: #fff; padding: .75rem; }
 .ref-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
