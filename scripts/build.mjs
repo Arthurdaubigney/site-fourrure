@@ -10,7 +10,7 @@ const FAQ_SETS = {
   contact: ['gratuit', 'form', 'conf', 'france'],
 };
 const REFS = JSON.parse(readFileSync('src/data/references.json', 'utf8'));
-const PAGES = { 'index.html': '/', 'fourrure-luxe.html': '/fourrure-luxe', 'fourrure-occasion.html': '/fourrure-occasion', 'contact.html': '/contact' };
+const PAGES = { 'index.html': '/', 'fourrure-luxe.html': '/fourrure-luxe', 'fourrure-occasion.html': '/fourrure-occasion', 'contact.html': '/contact', 'mentions-legales.html': '/mentions-legales' };
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const partial = (n) => readFileSync(`src/partials/${n}.html`, 'utf8');
 
