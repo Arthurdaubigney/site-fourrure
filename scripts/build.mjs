@@ -33,7 +33,9 @@ cpSync('src/img', 'dist/assets/img', { recursive: true });
 cpSync('src/app.js', 'dist/assets/app.js');
 cpSync('src/favicon.svg', 'dist/favicon.svg');
 
-for (const [file, path] of Object.entries({ ...PAGES, '404.html': '/404' })) {
+// Pages hors sitemap, non indexables (404, page de conversion /merci)
+const HIDDEN = { '404.html': '/404', 'merci.html': '/merci' };
+for (const [file, path] of Object.entries({ ...PAGES, ...HIDDEN })) {
   let html = readFileSync(`src/${file}`, 'utf8');
   const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || 'Maison Peltra';
   const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
@@ -41,7 +43,7 @@ for (const [file, path] of Object.entries({ ...PAGES, '404.html': '/404' })) {
   html = html.replace(/<!--@references-->/g, () => refsBlock());
   html = html.replace(/<!--@faq (\w+)-->/g, (_, s) => faqBlock(s));
   html = html.replaceAll('%TITLE%', title).replaceAll('%DESC%', desc).replaceAll('%PATH%', path === '/' ? '/' : path).replaceAll('%SITE_URL%', SITE_URL);
-  if (path === '/404') html = html.replace(/<link rel="canonical"[^>]*>\s*/g, '').replace('index, follow', 'noindex');
+  if (Object.values(HIDDEN).includes(path)) html = html.replace(/<link rel="(canonical|alternate)"[^>]*>\s*/g, '').replace(/<meta property="og:url"[^>]*>\s*/, '').replace('index, follow, max-image-preview:large', 'noindex, nofollow');
   writeFileSync(`dist/${file}`, html);
 }
 

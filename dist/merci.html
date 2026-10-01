@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="fr-FR">
 <head>
-  <title>Page introuvable | Maison Peltra</title>
-  <meta name="description" content="Cette page n'existe pas.">
+  <title>Merci | Maison Peltra</title>
+  <meta name="description" content="Votre demande a bien été envoyée.">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0907">
@@ -11,8 +11,8 @@
   <meta property="og:site_name" content="Maison Peltra">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Page introuvable | Maison Peltra">
-  <meta property="og:description" content="Cette page n'existe pas.">
+  <meta property="og:title" content="Merci | Maison Peltra">
+  <meta property="og:description" content="Votre demande a bien été envoyée.">
   <meta property="og:image" content="https://site-fourrure.vercel.app/assets/img/hero-atelier.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +30,9 @@
   ]}
   </script>
 
+  <!-- Google Ads : coller ici la balise de conversion (événement « conversion » du gtag) -->
 </head>
-<body class="grain">
+<body class="grain page-light-top page-merci">
 <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-500">
   <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
     <a href="/" class="font-display text-2xl tracking-wide md:text-3xl" aria-label="Maison Peltra — accueil">Maison <span class="gold-text italic">Peltra</span></a>
@@ -57,8 +58,19 @@
   <a href="/contact" class="btn-gold mt-4">Faire estimer mon manteau</a>
 </div>
 
-<main class="grid min-h-[100svh] place-items-center px-5 text-center">
-  <div><p class="eyebrow mb-6">Erreur 404</p><h1 class="font-display text-6xl md:text-8xl">Page <span class="gold-text italic">introuvable</span></h1><div class="mt-10 flex justify-center gap-4"><a href="/" class="btn-gold">Retour à l'accueil</a></div></div>
+<main id="top">
+<section class="theme-light bg-ink-900 grid min-h-[100svh] place-items-center px-5 py-32 text-center">
+  <div class="relative mx-auto max-w-2xl">
+    <div class="absolute left-1/2 top-1/2 -z-0 h-[420px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-500/15 blur-[120px]"></div>
+    <div class="relative">
+      <span class="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-full border border-gold-400/50 text-gold-400"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <p class="eyebrow mb-6">Demande envoyée</p>
+      <h1 class="font-display text-6xl font-light leading-[1] md:text-8xl">Merci<span class="gold-text italic">.</span></h1>
+      <p class="mx-auto mt-8 max-w-lg text-bone/70">Votre demande d'estimation a bien été transmise à Maison Peltra. Nos spécialistes vont étudier votre pièce. Estimation gratuite, sans engagement, en toute confidentialité.</p>
+      <div class="mt-10"><a href="/" class="btn-gold">Retour à l'accueil</a></div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="border-t border-gold-400/20 bg-ink-950">
   <div class="mx-auto max-w-7xl px-5 py-20 md:px-10">

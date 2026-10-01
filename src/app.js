@@ -65,6 +65,11 @@
   $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
+  // Formulaire envoyé : redirection vers /merci (page de conversion Google Ads)
+  addEventListener('message', (e) => {
+    if (e.origin === 'https://tally.so' && typeof e.data === 'string' && e.data.includes('Tally.FormSubmitted')) location.href = '/merci';
+  });
+
   // Tally embed (official loader pattern; iframe-resizer grows the iframe to the full form height)
   const tallyFrames = $$('iframe[data-tally-src]');
   if (tallyFrames.length) {

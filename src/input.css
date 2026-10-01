@@ -116,3 +116,5 @@
 @media (prefers-reduced-motion: reduce) { .ref-marquee { overflow-x: auto; } .ref-track { animation: none; } .ref-card[aria-hidden='true'] { display: none; } }
 
 .page-light-top #nav { background: rgb(var(--ink-950) / .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+
+.page-merci #floatCta { display: none; }
